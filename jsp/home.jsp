@@ -69,21 +69,23 @@ try {
 	
     ResultSet rs = stmt.executeQuery(sql);
     
-    rs.next();
+    if(!rs.next()) {
+    	%>
+ 	   <h2 class="float-left">Invalid User Id or Password, try again!</h2>
+ 	<%
+    }
     
     String p = rs.getString(1);
     
     rs.close();
     
     con.close();
-    
-    System.out.println("this is the pass: " + p + " this is what we got: " + pass);
-    
-    
+   
     if (p.equals(pass)) {
     	
     	  String redirectURL = "./dashboard.jsp";
         response.sendRedirect(redirectURL);	 
+        session.setAttribute("userId",Integer.parseInt(userId)); 
 	} else {
     	%>
     	   <h2 class="float-left">Invalid User Id or Password, try again!</h2>
@@ -93,7 +95,7 @@ try {
 	}  catch (Exception e) {
 		System.out.println("This is the error -> " + e);
 	}
-    	%>
+ %>
 
 </div>
 <script type="text/javascript" src="js/main.js"></script>

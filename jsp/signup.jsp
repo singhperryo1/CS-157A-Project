@@ -84,7 +84,6 @@ try {
 	
 	String check = "SELECT name FROM User WHERE userId ='" + ui + "'";
 	
-	System.out.println ("this is the check sql" + check);
 	
 	ResultSet rs = stmt.executeQuery(check);
 	
@@ -93,7 +92,6 @@ try {
 	
 	String sql = "INSERT INTO User (userId, name, password, registrationDate) VALUE('" + ui + "', '" + username + "', '" + upassword + "', CURDATE())";
 
-	System.out.println("this is the query" + sql);
 	
 	stmt.executeUpdate(sql);
 	
