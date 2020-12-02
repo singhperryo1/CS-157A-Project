@@ -146,7 +146,7 @@ try {
               <i class="fas fa-lock"></i>
               </div>
                 <div class="div">
-                    <input type="text" class="input" name ="location" placeholder = "Public/Private">
+                    <input type="text" class="input" name ="visbility" placeholder = "Public/Private">
                 </div>
             </div>
             <div class="input-div one">
@@ -154,7 +154,7 @@ try {
               <i class="fas fa-user"></i>
               </div>
                 <div class="div">
-                    <input type="text" class="input" name ="location" placeholder = "Enter Description Here">
+                    <input type="text" class="input" name ="description" placeholder = "Enter Description Here">
                 </div>
             </div>
             <div class="input-div one">
@@ -162,7 +162,7 @@ try {
               <i class="fas fa-user"></i>
               </div>
                 <div class="div">
-                    <input type="text" class="input" name ="location" placeholder = "Enter Title Here">
+                    <input type="text" class="input" name ="title" placeholder = "Enter Title Here">
                 </div>
             </div>
             <br>
@@ -185,31 +185,29 @@ try {
 
     String title = request.getParameter("title");
 
-    String resume = "hello.pdf"
+    String resume = "hello.pdf";
 
-    Statement stmt = con.createStatement();
+    String addSearch = "INSERT INTO Listing (visibilityStatus, description, title) VALUE('" + visbility + "', '" + description + "', '" + title + "')";
 
-    String addSearch = "INSERT INTO Listing (visbilityStatus, description, title) VALUE('" + visbility + "', '" + description + "', '" + title + "')";
-
-    System.out.println("this is the query" + add);
+    System.out.println("this is the query" + addSearch);
 
     stmt.executeUpdate(addSearch);
 
     String sql3 = "SELECT listingId FROM Listing WHERE description = '" + description + "'";
 
-    ResultSet rs = stmt.executeQuery(sql3);
+    ResultSet id = stmt.executeQuery(sql3);
 
-    rs.next();
+    id.next();
 
-    int listingID = rs.getInt(1);
+    int listingId = id.getInt(1);
 
-    String addSearch2 = "INSERT INTO JobSearch (listingId, availabilityTime, distanceRange, resume) VALUE(" + listingId + ", '" + availability + "', '" + distanceRange + "', '" + resume + "')";
+    String addSearch2 = "INSERT INTO JobSearch (listingId, availabilityTime, distanceRange, resume) VALUE(" + listingId + ", '" + availability + "', '" + distance + "', '" + resume + "')";
 
-    System.out.println("this is the query" + add);
+    System.out.println("this is the query" + addSearch2);
 
     stmt.executeUpdate(addSearch2);
 
-
+  }
 
 
 
