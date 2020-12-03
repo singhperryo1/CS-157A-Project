@@ -81,16 +81,17 @@
           	Class.forName("com.mysql.cj.jdbc.Driver");
           	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
 
-            String major = (String) session.getAttribute("major");
+            int ui = (int) session.getAttribute("userId");
+            out.println(ui);
             Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM JobListing WHERE requirements = '" + major + "'";
+            String sql = "SELECT * FROM student_bookmark_joblisting JOIN joblisting ON (student_bookmark_joblisting.jobListingId = joblisting.listingId) WHERE studentUserId = '" + ui + "'";
 
             //out.println(sql);
 
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + "<br/><br/>");
+                out.println(rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getString(7) + "<br/><br/>");
             }
 
               con.close();

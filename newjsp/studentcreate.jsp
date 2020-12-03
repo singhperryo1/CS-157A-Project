@@ -100,7 +100,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputTime" class="col-sm-0 control-label">
-                        Availability(XX:XX - YY:YY)</label>
+                        Availability(00:00-24:59)</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="inputTime" placeholder="Your availability" required>
                     </div>
