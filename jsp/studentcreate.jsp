@@ -100,7 +100,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputTime" class="col-sm-0 control-label">
-                        Availability(00:00-24:59)</label>
+                        Availability(00:00-24:00)</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="inputTime" placeholder="Your availability" required>
                     </div>
@@ -162,7 +162,7 @@
         stmt.executeUpdate(sql2);
         out.println(sql2);
 
-        String sql4 = "INSERT INTO jobsearch (listingId, availabilityTime, distanceRange) VALUE(" + listingId + ", " + availability + ", " + distance + ")";
+        String sql4 = "INSERT INTO jobsearch (listingId, availabilityTime, distanceRange) VALUE(" + listingId + ", '" + availability + "', " + distance + ")";
         stmt.executeUpdate(sql4);
         out.println(sql4);
       }

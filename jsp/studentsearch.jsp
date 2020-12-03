@@ -1,63 +1,111 @@
-<%@ page import="java.sql.*"%>
+<%@ page language="java" contentType="text/html; charset = UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import = "java.sql.*" %>
+
 <html>
-  <head>
-    <title>JDBC Connection example</title>
-    </head>
-  <body>
-    <h1>Student Search</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>JobMark - Your first job await</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
 
-    <table border="1">
-      <tr>
-        <td>Website</td>
-        <td>Earnings</td>
-        <td>Starting Time</td>
-   </tr>
+<body>
 
-<%
-String db = "jobmark";
-String user = "root";
-String password = "root";
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#">Jobmark</a>
 
-try {
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
 
-	java.sql.Connection con;
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                </li>
 
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobmark?serverTimezone=EST5EDT", user, password);
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Listing</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="bookmark.jsp">Bookmark</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+            <ul class="navbar-nav ml-auto mb-2 mb-rg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Log out</a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Search Results</h1>
+        <div class="login-wrap">
+          <%
+          String db = "Jobmark";
+          String user = "root";
+          String password = "Thefinalshot01!";
+
+          try {
+
+          	java.sql.Connection con;
+
+          	Class.forName("com.mysql.cj.jdbc.Driver");
+          	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
+
+            String major = (String) session.getAttribute("major");
+            Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM JobListing WHERE requirements = '" + major + "'";
+
+            //out.println(sql);
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + "<br/><br/>");
+            }
+
+              con.close();
 
 
-	/*String major = request.getParameter("major");
 
-  String earnings = request.getParameter("earnings");
 
-  String startTime = request.getParameter("startTime");
-
-  String endTime = request.getParameter("endTime");*/
-
-  String major = "Software Engineering";
-  int earnings = 10;
-  int startTime = 5;
-  int endTime = 10;
-
-	Statement stmt = con.createStatement();
-
-	String sql = "SELECT * FROM job_listing WHERE desired_major ='" + major + "' AND start_time < " + startTime + " AND end_time > " + endTime + " AND estimated_earnings > " + earnings;
-
-  ResultSet rs = stmt.executeQuery(sql);
-
-  while (rs.next()) {
-      out.println(rs.getString(2) + " " + rs.getString(5) + " " + rs.getString(6) + "<br/><br/>");
-  }
-
-  rs.close();
-
-  con.close();
-} catch(SQLException e) {
-          out.println("SQLException caught: " + e.getMessage());
-      }
-%>
-
+          	}  catch (Exception e) {
+          		out.println("This is the error -> " + e);
+          	}
+              	%>
+            </form>
+        </div>
+    </div>
 </div>
-<script type="text/javascript" src="js/main.js"></script>
+
 </body>
 </html>

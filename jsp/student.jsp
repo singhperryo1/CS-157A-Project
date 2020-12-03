@@ -1,227 +1,150 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset = UTF-8" pageEncoding="UTF-8" %>
 
 <%@ page import = "java.sql.*" %>
 
-	  <html>
+<html>
 <head>
-<title>Student Profile</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://fonts.googleapis.comcss?family=Poppins:600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>JobMark - Your first job await</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
+
 <body>
-<div class="container">
-    <div class="img">
-        <img src="img/bck1.png">
-    </div>
 
-<%
-String db = "Jobmark";
-String user = "root";
-String password = "Thefinalshot01!";
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="#">Jobmark</a>
 
-try {
+            <!-- Toggle button -->
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
 
-	java.sql.Connection con;
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left links -->
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                    </li>
 
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Listing</a>
+                    </li>
 
-	int ui = (int) session.getAttribute("userId");
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="bookmark.jsp">Bookmark</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+                <ul class="navbar-nav ml-auto mb-2 mb-rg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log out</a>
+                    </li>
+                </ul>
 
-	Statement stmt = con.createStatement();
-
-	String sql = "SELECT * FROM Student WHERE userId ='" + ui + "'";
-
-	ResultSet rs = stmt.executeQuery(sql);
-
-	int i = 0;
-
-	while (rs.next()) {
-		i++;
-	}
-
-	System.out.println("this is aqui" + i);
-
-	if(i == 0) {
-    	%>
-    <div class="login-content">
-        <form action="student.jsp" method = "POST">
-            <img src="img/avatar.svg">
-            <h2 class="title">Student Profile</h2>
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="major" placeholder = "Enter Major Here">
-
-                </div>
             </div>
-                        <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="location" placeholder = "Enter Location Here">
-                </div>
-            </div>
-
-
-            <div class="input-div pass">
-                <div class="i">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="div">
-                    <input type="email" class="input" name ="email" placeholder = "Enter Email Here">
-                </div>
-            </div>
-            <br>
-            <input type="submit" class="btn" value="Create Student Profile">
-        </form>
+            <!-- Collapsible wrapper -->
         </div>
- 	<%
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
 
- 	String major = request.getParameter("major");
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Create your Student profile</h1>
+            <div class="login-wrap">
+                <form class="form-horizontal" role="form" action="student.jsp" method = "POST">
+                    <div class="form-group">
+                        <label for="inputUser" class="col-sm-3 control-label">
+                            Major</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inputMajor" placeholder="Your major" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUser" class="col-sm-3 control-label">
+                            Location</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inputLocation" placeholder="Your location" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPsw" class="col-sm-3 control-label">
+                            Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" name="inputEmail" placeholder="Your email" required>
+                        </div>
+                    </div>
 
- 	String location = request.getParameter("location");
+                    <br>
 
- 	String email = request.getParameter("email");
-
- 	if (ui != 0 && major != null && major != "" && location != null && location != "" && email != null && email != "") {
-
-
- 		String add = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
-
- 		System.out.println("this is the query" + add);
-
- 		stmt.executeUpdate(add);
-
- 		 String redirectURL = "./student.jsp";
-         response.sendRedirect(redirectURL);
-
- 	}
-    } else {
-
-
-    	%>
-   	 <div class="login-content">
-
-        <form action="student.jsp" method = "POST">
-            <img src="img/avatar.svg">
-            <h2 class="title">Job Search</h2>
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="jobtitle" placeholder = "Enter Job Title">
-
-                </div>
+                    <div class="form-group last">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-success btn-sm">
+                                Create</button>
+                            <button type="reset" class="btn btn-default btn-sm">
+                                Reset</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-                        <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="distance" placeholder = "Enter Distance Eg: 8 - 10 im miles">
-                </div>
-            </div>
+        </div>
 
-            <div class="input-div one">
-                <div class="i">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="div">
-                    <input type="text" class="input" name ="availability" placeholder = "Enter Time Eg: 9:00AM - 6:00PM">
-                </div>
-            </div>
+        <%
+        String db = "Jobmark";
+        String user = "root";
+        String password = "Thefinalshot01!";
 
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-lock"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="visbility" placeholder = "Public/Private">
-                </div>
-            </div>
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="description" placeholder = "Enter Description Here">
-                </div>
-            </div>
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="title" placeholder = "Enter Title Here">
-                </div>
-            </div>
-            <br>
-            <input type="file"  accept = ".pdf" name = "resume" value="Upload Resume">
-            <input type="submit" class="btn" value="Create Job Search">
-        </form>
+        try {
+
+        	java.sql.Connection con;
+
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+        	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
+
+        	String major = request.getParameter("inputMajor");
+
+        	String location = request.getParameter("inputLocation");
+
+        	String email = request.getParameter("inputEmail");
+
+        	Statement stmt = con.createStatement();
+
+          int ui = (int) session.getAttribute("userId");
+
+          if(major != null && location != null && email != null){
+            String sql = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
+            session.setAttribute("major",major);
+            out.println(sql);
+
+            stmt.executeUpdate(sql);
+
+            con.close();
+          }
+
+
+
+        	}  catch (Exception e) {
+        		out.println("This is the error -> " + e);
+        	}
+            	%>
     </div>
 
-   	<%
-
-    String jobTitle = request.getParameter("jobtitle");
-
-    String distance = request.getParameter("distance");
-
-    String availability = request.getParameter("availability");
-
-    String visbility = request.getParameter("visbility");
-
-    String description = request.getParameter("description");
-
-    String title = request.getParameter("title");
-
-    String resume = "hello.pdf";
-
-    String addSearch = "INSERT INTO Listing (visibilityStatus, description, title) VALUE('" + visbility + "', '" + description + "', '" + title + "')";
-
-    System.out.println("this is the query" + addSearch);
-
-    stmt.executeUpdate(addSearch);
-
-    String sql3 = "SELECT listingId FROM Listing WHERE description = '" + description + "'";
-
-    ResultSet id = stmt.executeQuery(sql3);
-
-    id.next();
-
-    int listingId = id.getInt(1);
-
-    String addSearch2 = "INSERT INTO JobSearch (listingId, availabilityTime, distanceRange, resume) VALUE(" + listingId + ", '" + availability + "', '" + distance + "', '" + resume + "')";
-
-    System.out.println("this is the query" + addSearch2);
-
-    stmt.executeUpdate(addSearch2);
-
-  }
-
-
-
-	rs.close();
-	con.close();
-} catch (Exception e) {
-	System.out.println("This is the error -> " + e);
-}
-
-
-%>
-
-
-</div>
-<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

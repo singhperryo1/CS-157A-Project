@@ -176,7 +176,7 @@
         stmt.executeUpdate(sql2);
         out.println(sql2);
 
-        String sql4 = "INSERT INTO joblisting (listingId, requirements, website, responsibilities, estimatedEarnings) VALUE(" + listingId + ", " + requirements + ", " + website + ", " + responsibilities + ", " + salary + ")";
+        String sql4 = "INSERT INTO joblisting (listingId, requirements, website, responsibilities, estimatedEarnings) VALUE('" + listingId + "', '" + requirements + "', '" + website + "', '" + responsibilities + "', '" + salary + "')";
         stmt.executeUpdate(sql4);
         out.println(sql4);
       }

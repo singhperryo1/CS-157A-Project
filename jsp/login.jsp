@@ -33,17 +33,17 @@
                 <!-- Left links -->
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Home</a>
+                        <a class="nav-link " aria-current="page" href="home.jsp">Home</a>
                     </li>
                 </ul>
                 <!-- Left links -->
                 <ul class="navbar-nav ml-auto mb-2 mb-rg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Login</a>
+                        <a class="nav-link active" href="login.jsp">Login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
+                        <a class="nav-link" href="signup.jsp">Sign Up</a>
                     </li>
                 </ul>
 

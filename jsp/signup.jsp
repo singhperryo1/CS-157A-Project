@@ -1,120 +1,152 @@
-<%@ page language="java" contentType="text/html; charset = UTF-8" pageEncoding="UTF-8" %> 
+<%@ page language="java" contentType="text/html; charset = UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import = "java.sql.*" %> 
-<html> 
-<head> 
-<title>Jobmark Sign Up</title> 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://fonts.googleapis.comcss?family=Poppins:600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head> 
-<body> 
-<div class="container">
-    <div class="img">
-        <img src="img/login.svg">
+<%@ page import = "java.sql.*" %>
+
+<html>
+<head>
+    <title>JobMark - Your first job await</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="#">Jobmark</a>
+
+            <!-- Toggle button -->
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left links -->
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="home.jsp">Home</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+                <ul class="navbar-nav ml-auto mb-2 mb-rg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.jsp">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="signup.jsp">Sign Up</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Please sign up with your credentials in form below</h1>
+            <div class="login-wrap">
+                <form class="form-horizontal" role="form" action="signup.jsp" method = "POST">
+                    <div class="form-group">
+                        <label for="inputUser" class="col-sm-3 control-label">
+                            UserID</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="inputUserID" placeholder="Your ID" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUser" class="col-sm-3 control-label">
+                            Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inputUser" placeholder="Your name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPsw" class="col-sm-3 control-label">
+                            Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="inputPsw" placeholder="Your password" required>
+                        </div>
+                    </div>
+
+                    <br> Account Type
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="roleAnswer" /> Student
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="roleAnswer" /> Recruiter
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group last">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-success btn-sm">
+                                Sign up</button>
+                            <button type="reset" class="btn btn-default btn-sm">
+                                Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <%
+        String db = "Jobmark";
+        String user = "root";
+        String password = "Thefinalshot01!";
+
+        try {
+
+        	java.sql.Connection con;
+
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+        	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
+
+        	String userId = request.getParameter("inputUserID");
+
+        	String username = request.getParameter("inputUser");
+
+        	String upassword = request.getParameter("inputPsw");
+
+          out.println(username);
+
+        	Statement stmt = con.createStatement();
+
+        	int ui = Integer.parseInt(userId);
+
+        	String sql = "INSERT INTO User (userId, name, password, registrationDate) VALUE('" + ui + "', '" + username + "', '" + upassword + "', CURDATE())";
+
+          out.println(sql);
+        	stmt.executeUpdate(sql);
+
+          con.close();
+
+
+        	}  catch (Exception e) {
+        		out.println("This is the error -> " + e);
+        	}
+            	%>
     </div>
-    <div class="login-content">
-        <form action="signup.jsp" method = "POST">
-            <img src="img/avatar.svg">
-            <h2 class="title">Sign Up</h2>
-            <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="userId" placeholder = "Enter User Id Here">
-                    
-                </div>
-            </div>
-                        <div class="input-div one">
-            <div class = "i">
-              <i class="fas fa-user"></i>
-              </div>
-                <div class="div">
-                    <input type="text" class="input" name ="username" placeholder = "Enter Name Here">
-                </div>
-            </div>
-            
-            <div class="input-div pass">
-                <div class="i">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <div class="div">
-                    <input type="password" class="input" name ="password" placeholder = "Enter Password Here">
-                </div>
-            </div>
-            <br>
-            <input type="submit" class="btn" value="Sign Up">
-        </form>
-    </div>
-<%
-String db = "Jobmark"; 
-String user = "root"; 
-String password = "Thefinalshot01!";
-
-try {
-	
-	java.sql.Connection con;
-	
-	Class.forName("com.mysql.cj.jdbc.Driver"); 
-	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
-
-	
-	String userId = request.getParameter("userId");
-	
-	String username = request.getParameter("username");
-	
-	String upassword = request.getParameter("password");
-	
-	int flag = 0; 
-	
-	for (int i = 0; i < userId.length(); i++) {
-		if (userId.charAt(i) < '0' && userId.charAt(i) > '9') {
-			flag = 1; 
-		}
-	}
-	
-	if (flag == 0 && username != null && username != "" && upassword != null && upassword != "") {
-		
-	Statement stmt = con.createStatement();
-	
-	int ui = Integer.parseInt(userId); 
-	
-	String check = "SELECT name FROM User WHERE userId ='" + ui + "'";
-	
-	
-	ResultSet rs = stmt.executeQuery(check);
-	
-	
-	if (!rs.next()) {
-	
-	String sql = "INSERT INTO User (userId, name, password, registrationDate) VALUE('" + ui + "', '" + username + "', '" + upassword + "', CURDATE())";
-
-	
-	stmt.executeUpdate(sql);
-	
-    %>
-	   <h2 class="float-left">You are now Signed Up!<a href = "./home.jsp" class = "float-right"><h2>Sign In</h2></a></h2>
-	<%
-    
-	
-	} else {
-		  %>
-		   <h2 class="float-left">User Id already exists. Please try different one!</h2>
-		<%
-	}
-    
-    con.close();
-    
-	}
-	}  catch (Exception e) {
-		System.out.println("This is the error -> " + e);
-	}
-    	%>
-
-</div>
-<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
