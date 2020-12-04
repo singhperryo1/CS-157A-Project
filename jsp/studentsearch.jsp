@@ -68,7 +68,14 @@
 <div class="container">
     <div class="row">
         <h1 class="text-center">Search Results</h1>
-        <div class="login-wrap">
+        <table border="2">
+        <tr>
+        <td>Major</td>
+        <td>Website</td>
+        <td>Requirements</td>
+        <td>Salary</td>
+        <td>Bookmark</td>
+        </tr>
           <%
           String db = "Jobmark";
           String user = "root";
@@ -90,7 +97,15 @@
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + "<br/><br/>");
+              %>
+              <tr>
+    <td><%=rs.getString(2) %></td>
+    <td><%=rs.getString(3) %></td>
+    <td><%=rs.getString(4) %></td>
+    <td>$<%=rs.getInt(5) %></td>
+    <td><input class="btn btn-primary btn-sm" type="submit" value="Submit"></td>
+</tr>
+<%
             }
 
               con.close();
@@ -103,7 +118,7 @@
           	}
               	%>
             </form>
-        </div>
+
     </div>
 </div>
 
