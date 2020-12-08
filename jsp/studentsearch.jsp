@@ -40,11 +40,19 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="studentedit.jsp">Edit your profile</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Listing</a>
+                    <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Search</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="studentremove.jsp">Remove your Search</a>
                 </li>
 
                 <li class="nav-item">
@@ -92,7 +100,7 @@
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM JobListing WHERE requirements = '" + major + "'";
 
-            //out.println(sql);
+            out.println(sql);
 
             ResultSet rs = stmt.executeQuery(sql);
 

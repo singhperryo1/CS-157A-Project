@@ -40,23 +40,19 @@
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="studentedit.jsp">Edit your profile</a>
+                      <a class="nav-link " aria-current="page" href="recruitersearch.jsp">Search for students</a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
+                      <a class="nav-link " aria-current="page" href="recruitercreate.jsp">Create your Job Listing</a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Search</a>
+                      <a class="nav-link active" aria-current="page" href="recruitermodify.jsp">Modify your Job Listing</a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="studentremove.jsp">Remove your Search</a>
-                  </li>
-
-                  <li class="nav-item">
-                      <a class="nav-link " aria-current="page" href="bookmark.jsp">Bookmark</a>
+                      <a class="nav-link active" aria-current="page" href="recruiterremove">Remove your Job Listing</a>
                   </li>
                 </ul>
                 <!-- Left links -->
@@ -75,28 +71,21 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Create your Student profile</h1>
+            <h1 class="text-center">Create your Recruiter profile</h1>
             <div class="login-wrap">
-                <form class="form-horizontal" role="form" action="student.jsp" method = "POST">
+                <form class="form-horizontal" role="form" action="recruiterremove.jsp" method = "POST">
                     <div class="form-group">
-                        <label for="inputUser" class="col-sm-3 control-label">
-                            Major</label>
+                        <label for="inputCompany" class="col-sm-3 control-label">
+                            Company</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputMajor" placeholder="Your major" required>
+                            <input type="text" class="form-control" name="inputCompany" placeholder="Your company" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUser" class="col-sm-3 control-label">
-                            Location</label>
+                        <label for="inputEmail" class="col-sm-3 control-label">
+                            Work Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputLocation" placeholder="Your location" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPsw" class="col-sm-3 control-label">
-                            Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" name="inputEmail" placeholder="Your email" required>
+                            <input type="email" class="form-control" name="inputEmail" placeholder="Your work email" required>
                         </div>
                     </div>
 
@@ -126,9 +115,7 @@
         	Class.forName("com.mysql.cj.jdbc.Driver");
         	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
 
-        	String major = request.getParameter("inputMajor");
-
-        	String location = request.getParameter("inputLocation");
+        	String company = request.getParameter("inputCompany");
 
         	String email = request.getParameter("inputEmail");
 
@@ -136,9 +123,8 @@
 
           int ui = (int) session.getAttribute("userId");
 
-          if(major != null && location != null && email != null){
-            String sql = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
-            session.setAttribute("major",major);
+          if(company != null && email != null){
+            String sql = "INSERT INTO Recruiter (userId, company, workEmail) VALUE('" + ui + "', '" + company + "', '" + email + "')";
             out.println(sql);
 
             stmt.executeUpdate(sql);

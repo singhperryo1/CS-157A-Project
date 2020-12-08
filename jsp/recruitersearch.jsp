@@ -46,6 +46,14 @@
               <li class="nav-item">
                   <a class="nav-link " aria-current="page" href="recruitercreate.jsp">Create your Job Listing</a>
               </li>
+
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="recruitermodify.jsp">Modify your Job Listing</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="recruiterremove">Remove your Job Listing</a>
+              </li>
             </ul>
             <!-- Left links -->
             <ul class="navbar-nav ml-auto mb-2 mb-rg-0">
@@ -112,12 +120,12 @@
             if(distance != null && availability != null){
               String sql = "SELECT * FROM JobSearch JOIN listing USING (listingId) JOIN student_does_jobsearch USING (listingId) JOIN student ON (student_does_jobsearch.studentUserId = student.userId) WHERE availabilityTime = '" + availability + "' AND distanceRange = '" + distance + "'";
 
-              //out.println(sql);
+              out.println(sql);
 
               ResultSet rs = stmt.executeQuery(sql);
 
               while (rs.next()) {
-                  out.println(rs.getString(6) + " " + rs.getString(7) + " " + rs.getString(11) + " " + rs.getString(12) + " " + rs.getString(13) + "<br/><br/>");
+                  out.println(rs.getString(6) + "|" + rs.getString(7) + "|" + rs.getString(11) + "|" + rs.getString(12) + "|" + rs.getString(13) + "<br/><br/>");
               }
             }
 

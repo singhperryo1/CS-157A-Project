@@ -75,9 +75,9 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Create your Student profile</h1>
+            <h1 class="text-center">Edit your Student profile</h1>
             <div class="login-wrap">
-                <form class="form-horizontal" role="form" action="student.jsp" method = "POST">
+                <form class="form-horizontal" role="form" action="studentedit.jsp" method = "POST">
                     <div class="form-group">
                         <label for="inputUser" class="col-sm-3 control-label">
                             Major</label>
@@ -105,7 +105,7 @@
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="btn btn-success btn-sm">
-                                Create</button>
+                                Update</button>
                             <button type="reset" class="btn btn-default btn-sm">
                                 Reset</button>
                         </div>
@@ -137,7 +137,7 @@
           int ui = (int) session.getAttribute("userId");
 
           if(major != null && location != null && email != null){
-            String sql = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
+            String sql = "UPDATE Student SET major = '" + major + "', studentEmail = '" + email + "', location = '" + location + "' WHERE userId = '" + ui + "'";
             session.setAttribute("major",major);
             out.println(sql);
 

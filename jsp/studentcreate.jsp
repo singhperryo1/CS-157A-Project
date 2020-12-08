@@ -35,21 +35,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left links -->
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Profile</a>
-                </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Profile</a>
+              </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
-                </li>
+              <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="studentedit.jsp">Edit your profile</a>
+              </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Listing</a>
-                </li>
+              <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="studentsearch.jsp">Search your job</a>
+              </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="bookmark.jsp">Bookmark</a>
-                </li>
+              <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="studentcreate.jsp">Create your Job Search</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="studentremove.jsp">Remove your Search</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="bookmark.jsp">Bookmark</a>
+              </li>
             </ul>
             <!-- Left links -->
             <ul class="navbar-nav ml-auto mb-2 mb-rg-0">

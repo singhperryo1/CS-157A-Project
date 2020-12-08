@@ -46,6 +46,14 @@
                   <li class="nav-item">
                       <a class="nav-link " aria-current="page" href="recruitercreate.jsp">Create your Job Listing</a>
                   </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="recruitermodify.jsp">Modify your Job Listing</a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="recruiterremove">Remove your Job Listing</a>
+                  </li>
                 </ul>
                 <!-- Left links -->
                 <ul class="navbar-nav ml-auto mb-2 mb-rg-0">

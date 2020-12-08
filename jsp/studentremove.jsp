@@ -75,9 +75,9 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Create your Student profile</h1>
+            <h1 class="text-center">Edit your Student profile</h1>
             <div class="login-wrap">
-                <form class="form-horizontal" role="form" action="student.jsp" method = "POST">
+                <form class="form-horizontal" role="form" action="studentremove.jsp" method = "POST">
                     <div class="form-group">
                         <label for="inputUser" class="col-sm-3 control-label">
                             Major</label>
