@@ -134,7 +134,7 @@ try {
     	%>
     	   <h2 class="float-left">Invalid User Id or Password, try again!</h2>
     	<%
-    }
+
 	}
 	}  catch (Exception e) {
 		System.out.println("This is the error -> " + e);

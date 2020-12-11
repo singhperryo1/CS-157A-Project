@@ -120,7 +120,7 @@
 
 
         	}  catch (Exception e) {
-        		out.println("This is the error -> " + e);
+        		//out.println("This is the error -> " + e);
         	}
             	%>
     </div>
