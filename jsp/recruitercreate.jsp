@@ -170,11 +170,11 @@
       if(visibility != null && title != null && description != null & responsibilities != null && website != null && salary != null){
         String sql = "INSERT INTO listing (visibilityStatus, description, title) VALUE('" + visibility + "', '" + description + "', '" + title + "')";
         stmt.executeUpdate(sql);
-        out.println(sql);
+        //out.println(sql);
 
         String sql3 = "SELECT listingId FROM listing WHERE description = '" + description + "'";
         ResultSet rs = stmt.executeQuery(sql3);
-        out.println(sql3);
+        //out.println(sql3);
 
         rs.next();
 
@@ -182,11 +182,11 @@
 
         String sql2 = "INSERT INTO joblistings_postedby_recruiter (recruiterUserId, jobListingId) VALUE(" + ui + "," + listingId + ")";
         stmt.executeUpdate(sql2);
-        out.println(sql2);
+        //out.println(sql2);
 
         String sql4 = "INSERT INTO joblisting (listingId, requirements, website, responsibilities, estimatedEarnings) VALUE('" + listingId + "', '" + requirements + "', '" + website + "', '" + responsibilities + "', '" + salary + "')";
         stmt.executeUpdate(sql4);
-        out.println(sql4);
+        //out.println(sql4);
       }
 
 

@@ -139,7 +139,7 @@
           if(major != null && location != null && email != null){
             String sql = "UPDATE Student SET major = '" + major + "', studentEmail = '" + email + "', location = '" + location + "' WHERE userId = '" + ui + "'";
             session.setAttribute("major",major);
-            out.println(sql);
+            //out.println(sql);
 
             stmt.executeUpdate(sql);
 

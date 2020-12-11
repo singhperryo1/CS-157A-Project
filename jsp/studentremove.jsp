@@ -75,39 +75,13 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Edit your Student profile</h1>
+            <h1 class="text-center">Remove your Job Search</h1>
             <div class="login-wrap">
                 <form class="form-horizontal" role="form" action="studentremove.jsp" method = "POST">
-                    <div class="form-group">
-                        <label for="inputUser" class="col-sm-3 control-label">
-                            Major</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputMajor" placeholder="Your major" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputUser" class="col-sm-3 control-label">
-                            Location</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputLocation" placeholder="Your location" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPsw" class="col-sm-3 control-label">
-                            Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" name="inputEmail" placeholder="Your email" required>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="form-group last">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-success btn-sm">
-                                Create</button>
-                            <button type="reset" class="btn btn-default btn-sm">
-                                Reset</button>
+                    <div class="form-group last text-center">
+                            <h5 class="text-center">Are you sure you want to remove your search?</h5>
+                            <button type="submit" class="btn btn-success btn">
+                                Remove</button>
                         </div>
                     </div>
                 </form>
@@ -126,25 +100,26 @@
         	Class.forName("com.mysql.cj.jdbc.Driver");
         	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
 
-        	String major = request.getParameter("inputMajor");
-
-        	String location = request.getParameter("inputLocation");
-
-        	String email = request.getParameter("inputEmail");
-
-        	Statement stmt = con.createStatement();
-
+          Statement stmt = con.createStatement();
           int ui = (int) session.getAttribute("userId");
 
-          if(major != null && location != null && email != null){
-            String sql = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
-            session.setAttribute("major",major);
-            out.println(sql);
+          String sql1 = "SELECT listingId FROM student_does_jobsearch WHERE studentUserId =" + ui ;
+          ResultSet rs = stmt.executeQuery(sql1);
+          rs.next();
+          int listingId = rs.getInt(1);
+          //out.println(listingId);
 
-            stmt.executeUpdate(sql);
+          String sql = "DELETE FROM jobsearch WHERE listingId = '" + listingId + "'";
+          //out.println(sql);
 
-            con.close();
-          }
+          stmt.executeUpdate(sql);
+
+          String sql2 = "DELETE FROM listing WHERE listingId = '" + listingId + "'";
+          //out.println(sql);
+
+          stmt.executeUpdate(sql2);
+
+          con.close();
 
 
 

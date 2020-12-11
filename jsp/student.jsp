@@ -139,7 +139,7 @@
           if(major != null && location != null && email != null){
             String sql = "INSERT INTO Student (userId, major, studentEmail, location) VALUE('" + ui + "', '" + major + "', '" + email + "', '" + location + "')";
             session.setAttribute("major",major);
-            out.println(sql);
+            //out.println(sql);
 
             stmt.executeUpdate(sql);
 

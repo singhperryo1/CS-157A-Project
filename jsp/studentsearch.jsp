@@ -100,7 +100,8 @@
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM JobListing WHERE requirements = '" + major + "'";
 
-            out.println(sql);
+            //out.println(sql);
+
 
             ResultSet rs = stmt.executeQuery(sql);
 

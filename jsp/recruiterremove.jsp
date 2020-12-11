@@ -71,32 +71,13 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Create your Recruiter profile</h1>
+            <h1 class="text-center">Remove your Job Listing</h1>
             <div class="login-wrap">
-                <form class="form-horizontal" role="form" action="recruiterremove.jsp" method = "POST">
-                    <div class="form-group">
-                        <label for="inputCompany" class="col-sm-3 control-label">
-                            Company</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputCompany" placeholder="Your company" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="col-sm-3 control-label">
-                            Work Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" name="inputEmail" placeholder="Your work email" required>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="form-group last">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-success btn-sm">
-                                Create</button>
-                            <button type="reset" class="btn btn-default btn-sm">
-                                Reset</button>
+                <form class="form-horizontal" role="form" action="studentremove.jsp" method = "POST">
+                    <div class="form-group last text-center">
+                            <h5 class="text-center">Are you sure you want to remove your listing?</h5>
+                            <button type="submit" class="btn btn-success btn">
+                                Remove</button>
                         </div>
                     </div>
                 </form>
@@ -110,27 +91,31 @@
 
         try {
 
-        	java.sql.Connection con;
+          java.sql.Connection con;
 
         	Class.forName("com.mysql.cj.jdbc.Driver");
         	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
 
-        	String company = request.getParameter("inputCompany");
-
-        	String email = request.getParameter("inputEmail");
-
-        	Statement stmt = con.createStatement();
-
+          Statement stmt = con.createStatement();
           int ui = (int) session.getAttribute("userId");
 
-          if(company != null && email != null){
-            String sql = "INSERT INTO Recruiter (userId, company, workEmail) VALUE('" + ui + "', '" + company + "', '" + email + "')";
-            out.println(sql);
+          String sql1 = "SELECT jobListingId FROM joblistings_postedby_recruiter WHERE recruiterUserId =" + ui ;
+          ResultSet rs = stmt.executeQuery(sql1);
+          rs.next();
+          int listingId = rs.getInt(1);
+          //out.println(listingId);
 
-            stmt.executeUpdate(sql);
+          String sql = "DELETE FROM joblisting WHERE listingId = '" + listingId + "'";
+          //out.println(sql);
 
-            con.close();
-          }
+          stmt.executeUpdate(sql);
+
+          String sql2 = "DELETE FROM listing WHERE listingId = '" + listingId + "'";
+          //out.println(sql);
+
+          stmt.executeUpdate(sql2);
+
+          con.close();
 
 
 

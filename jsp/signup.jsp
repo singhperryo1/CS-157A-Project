@@ -129,7 +129,7 @@
 
         	String upassword = request.getParameter("inputPsw");
 
-          out.println(username);
+          //out.println(username);
 
         	Statement stmt = con.createStatement();
 
@@ -137,7 +137,7 @@
 
         	String sql = "INSERT INTO User (userId, name, password, registrationDate) VALUE('" + ui + "', '" + username + "', '" + upassword + "', CURDATE())";
 
-          out.println(sql);
+          //out.println(sql);
         	stmt.executeUpdate(sql);
 
           con.close();

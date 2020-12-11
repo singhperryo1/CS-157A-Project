@@ -71,30 +71,64 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Create your Recruiter profile</h1>
+            <h1 class="text-center">Modify your Job Listing</h1>
             <div class="login-wrap">
-                <form class="form-horizontal" role="form" action="recruitermodify.jsp" method = "POST">
+                <form class="form-horizontal" role="form"  action="recruitercreate.jsp" method = "POST">
+                  <div class="form-group">
+                      <label for="inputVisibility" class="col-sm-0 control-label">
+                          Visibility</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" name="inputVisibility" placeholder="Public/Private" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputTitle" class="col-sm-0 control-label">
+                          Title</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" name="inputTitle" placeholder="Title" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputDescription" class="col-sm-0 control-label">
+                          Description</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" name="inputDescription" placeholder="Description" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputRequirements" class="col-sm-0 control-label">
+                          Requirements (ex. Software Engineering)</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" name="inputRequirements" placeholder="Job Requirements" required>
+                      </div>
+                  </div>
                     <div class="form-group">
-                        <label for="inputCompany" class="col-sm-3 control-label">
-                            Company</label>
+                        <label for="inputWebsite" class="col-sm-0 control-label">
+                            Website</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="inputCompany" placeholder="Your company" required>
+                            <input type="text" class="form-control" name="inputWebsite" placeholder="Website" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail" class="col-sm-3 control-label">
-                            Work Email</label>
+                        <label for="inputResponsibilities" class="col-sm-0 control-label">
+                            Responsibilities</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" name="inputEmail" placeholder="Your work email" required>
+                            <input type="text" class="form-control" name="inputResponsibilities" placeholder="Job Responsibilities" required>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="inputSalary" class="col-sm-0 control-label">
+                            Estimated Salary</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="inputSalary" placeholder="Salary" required>
+                        </div>
+                    </div>
                     <br>
 
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="btn btn-success btn-sm">
-                                Create</button>
+                                Modify</button>
                             <button type="reset" class="btn btn-default btn-sm">
                                 Reset</button>
                         </div>
@@ -115,21 +149,37 @@
         	Class.forName("com.mysql.cj.jdbc.Driver");
         	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Jobmark?useUnicode = true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, password);
 
-        	String company = request.getParameter("inputCompany");
+          String visibility = request.getParameter("inputVisibility");
 
-        	String email = request.getParameter("inputEmail");
+          String title = request.getParameter("inputTitle");
 
-        	Statement stmt = con.createStatement();
+          String description = request.getParameter("inputDescription");
+
+          String website = request.getParameter("inputWebsite");
+
+          String requirements = request.getParameter("inputRequirements");
+
+          String responsibilities = request.getParameter("inputResponsibilities");
+
+          String salary = request.getParameter("inputSalary");
+
+          Statement stmt = con.createStatement();
 
           int ui = (int) session.getAttribute("userId");
 
-          if(company != null && email != null){
-            String sql = "INSERT INTO Recruiter (userId, company, workEmail) VALUE('" + ui + "', '" + company + "', '" + email + "')";
-            out.println(sql);
+          if(visibility != null && title != null && description != null & responsibilities != null && website != null && salary != null){
+            String sql1 = "SELECT listingId FROM joblistings_postedby_recruiter WHERE recruiterUserId =" + ui ;
+            ResultSet rs = stmt.executeQuery(sql1);
+            rs.next();
+            int listingId = rs.getInt(1);
 
+            String sql = "UPDATE listing SET visibilityStatus = '" + visibility + "', description ='" + description + "', title ='" + title + "' WHERE listingId = '" + listingId + "')";
             stmt.executeUpdate(sql);
+            //out.println(sql);
 
-            con.close();
+            String sql4 = "UPDATE joblisting SET requirements = '" + requirements + "', website = '" + website + "', responsibilities ='" + responsibilities + "', estimatedEarnings ='" + salary + "' WHERE listingId = '" + listingId + "')";
+            stmt.executeUpdate(sql4);
+            //out.println(sql4);
           }
 
 

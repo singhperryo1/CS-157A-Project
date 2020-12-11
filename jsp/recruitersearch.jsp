@@ -120,7 +120,7 @@
             if(distance != null && availability != null){
               String sql = "SELECT * FROM JobSearch JOIN listing USING (listingId) JOIN student_does_jobsearch USING (listingId) JOIN student ON (student_does_jobsearch.studentUserId = student.userId) WHERE availabilityTime = '" + availability + "' AND distanceRange = '" + distance + "'";
 
-              out.println(sql);
+              //out.println(sql);
 
               ResultSet rs = stmt.executeQuery(sql);
 

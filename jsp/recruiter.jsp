@@ -125,7 +125,7 @@
 
           if(company != null && email != null){
             String sql = "INSERT INTO Recruiter (userId, company, workEmail) VALUE('" + ui + "', '" + company + "', '" + email + "')";
-            out.println(sql);
+            //out.println(sql);
 
             stmt.executeUpdate(sql);
 
